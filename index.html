@@ -1,0 +1,104 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hello from Electron renderer!</title>
+  <link
+    href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700|Roboto:400,300,700,500,200,800,600,900,100'
+    rel='stylesheet' type='text/css'>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script nonce="undefined" src="//www.zingchart.com/scripts/zcDocs.js"></script>
+  <link href='//www.zingchart.com/css/zcDocs.css' rel='stylesheet' type='text/css'>
+  <script nonce="undefined" src='//code.jquery.com/jquery-2.1.4.min.js'></script>
+
+  <script nonce="undefined" src="https://cdn.zingchart.com/zingchart.min.js"></script>
+  <!-- use the font -->
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="flex flex-row h-screen w-screen items-center gap-20 justify-center">
+    <div class="form flex flex-wrap flex-col items-center">
+      <h2 class="mb-9 h2">BMI Calculator</h2>
+
+      <div class="w-full flex flex-col gap-6 form form-wrapper">
+
+        <div class="relative">
+          <div class="medium-body">Your Height</div>
+          <input name="" id="height" class="input " />
+          <div class="height"></div>
+        </div>
+
+        <div class="relative">
+          <div class="medium-body">Your Weight</div>
+          <input id="weight" class="input " />
+          <div class="weight"></div>
+        </div>
+
+        <div class="w-full flex flex-row gap-4 justify-center">
+          <button id="btn"> <img src="Frame 60.png" alt=""> calculate BMI</button>
+        </div>
+
+        <div>
+          <span id="condition"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex flex-col gap-2 relative">
+      <div id='myChart'></div>
+      <div class="flex flex-row flex-wrap gap-4 absolute bottom-[10px]">
+        <div class="color-wrap flex">
+          <div><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path
+                d="M16 8C16 12.4183 12.4183 16 8 16C3.58172 16 0 12.4183 0 8C0 3.58172 3.58172 0 8 0C12.4183 0 16 3.58172 16 8ZM5.6 8C5.6 9.32548 6.67452 10.4 8 10.4C9.32548 10.4 10.4 9.32548 10.4 8C10.4 6.67452 9.32548 5.6 8 5.6C6.67452 5.6 5.6 6.67452 5.6 8Z"
+                fill="#4DB5FE" />
+            </svg></div>
+          <div>Underweight</div>
+        </div>
+      
+        <div class="color-wrap flex">
+          <div><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path
+                d="M16 8C16 12.4183 12.4183 16 8 16C3.58172 16 0 12.4183 0 8C0 3.58172 3.58172 0 8 0C12.4183 0 16 3.58172 16 8ZM5.6 8C5.6 9.32548 6.67452 10.4 8 10.4C9.32548 10.4 10.4 9.32548 10.4 8C10.4 6.67452 9.32548 5.6 8 5.6C6.67452 5.6 5.6 6.67452 5.6 8Z"
+                fill="#0EAD6A" />
+            </svg></div>
+          <div>Normal</div>
+        </div>
+      
+        <div class="color-wrap flex">
+          <div><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path
+                d="M16 8C16 12.4183 12.4183 16 8 16C3.58172 16 0 12.4183 0 8C0 3.58172 3.58172 0 8 0C12.4183 0 16 3.58172 16 8ZM5.6 8C5.6 9.32548 6.67452 10.4 8 10.4C9.32548 10.4 10.4 9.32548 10.4 8C10.4 6.67452 9.32548 5.6 8 5.6C6.67452 5.6 5.6 6.67452 5.6 8Z"
+                fill="#FEDC64" />
+            </svg></div>
+          <div>Overweight</div>
+        </div>
+      
+        <div class="color-wrap flex">
+          <div><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path
+                d="M16 8C16 12.4183 12.4183 16 8 16C3.58172 16 0 12.4183 0 8C0 3.58172 3.58172 0 8 0C12.4183 0 16 3.58172 16 8ZM5.6 8C5.6 9.32548 6.67452 10.4 8 10.4C9.32548 10.4 10.4 9.32548 10.4 8C10.4 6.67452 9.32548 5.6 8 5.6C6.67452 5.6 5.6 6.67452 5.6 8Z"
+                fill="#FF9B4D" />
+            </svg></div>
+          <div>Obese class I</div>
+        </div>
+      
+        <div class="color-wrap flex">
+          <div><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path
+                d="M16 8C16 12.4183 12.4183 16 8 16C3.58172 16 0 12.4183 0 8C0 3.58172 3.58172 0 8 0C12.4183 0 16 3.58172 16 8ZM5.6 8C5.6 9.32548 6.67452 10.4 8 10.4C9.32548 10.4 10.4 9.32548 10.4 8C10.4 6.67452 9.32548 5.6 8 5.6C6.67452 5.6 5.6 6.67452 5.6 8Z"
+                fill="#FF5353" />
+            </svg></div>
+          <div>Obese class II</div>
+        </div>
+      </div>
+  </div>
+  <script src="./render.js"></script>
+</body>
+
+
+</html>
